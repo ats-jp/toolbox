@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="Windows-31J"?>
+<project name="profiler" default="build">
+
+	<path id="project.classpath">
+		<pathelement location="lib/javassist.jar" />
+	</path>
+
+	<target name="cleanup">
+		<delete dir="build" />
+		<delete file="profiler.jar" />
+		<delete file="profiler-src.jar" />
+	</target>
+
+	<target name="build" depends="cleanup">
+		<mkdir dir="build" />
+		<javac srcdir="src" destdir="build" debug="true" optimize="true" deprecation="true" encoding="Windows-31J">
+			<classpath refid="project.classpath" />
+			<include name="**/*.java" />
+		</javac>
+		<copy file="src/version.txt" todir="build" />
+		<jar basedir="build" jarfile="profiler.jar" />
+	</target>
+
+	<target name="src-jar" depends="cleanup">
+		<jar basedir="src" jarfile="profiler-src.jar" />
+	</target>
+</project>

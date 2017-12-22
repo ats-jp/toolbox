@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="Windows-31J"?>
+<project name="starter" default="build">
+
+	<target name="cleanup">
+		<delete dir="build" />
+		<delete file="starter.jar" />
+		<delete file="starter-src.jar" />
+	</target>
+
+	<target name="build" depends="cleanup">
+		<mkdir dir="build" />
+		<javac srcdir="src" destdir="build" debug="true" optimize="true" deprecation="true" encoding="Windows-31J">
+			<include name="**/*.java" />
+		</javac>
+		<copy todir="build">
+			<fileset dir="src" includes="**/*.java" />
+		</copy>
+		<copy file="src/version.txt" todir="build" />
+		<jar basedir="build" manifest="Manifest.mf" jarfile="starter.jar" />
+	</target>
+</project>
